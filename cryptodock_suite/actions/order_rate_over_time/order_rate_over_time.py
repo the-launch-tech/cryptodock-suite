@@ -1,8 +1,8 @@
-import random
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
+from .data import data
 
 
 def order_rate_over_time(params, Sdk) :
@@ -23,15 +23,15 @@ def order_rate_over_time(params, Sdk) :
     plt.rc('figure', titlesize=BIGGER_SIZE)
 
     if params['test'] :
-        data = [{'order_count': n} for n in range(random.randint(50,1000)) for l in range(0, random.randint(1,100))]
+        events = data()
     else :
-        data = Sdk.Local.get_events(
+        events = Sdk.Local.get_events(
             strategy=params['strategy'],
             session=params['session'],
             fields=['order_count']
         )
 
-    list = [el['order_count'] for el in data]
+    list = [el['order_count'] for el in events]
     group_len = int(math.ceil(len(list)) / WINDOW)
     matrix = [list[i:i + WINDOW] for i in range(0, len(list), WINDOW)]
     rate_list = [len(np.unique(el)) for el in matrix]
@@ -42,6 +42,3 @@ def order_rate_over_time(params, Sdk) :
     plt.ylabel('Orders During Period')
     plt.xticks([int(i * WINDOW) for i in range(0, len(rate_list))])
     plt.show()
-
-def test_data() :
-    return []

@@ -22,7 +22,7 @@ class CryptoDockSuite(ABC) :
         else :
             self.Sdk = {}
             self.params = {
-                'command': 'AVG_FEE_OT',
+                'command': 'AVG_SESSION_TIME',
                 'session': 1,
                 'strategy': 3,
                 'window': 1800,

@@ -1,18 +1,6 @@
 import random
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import math
 
-
-def side_ratio_over_time(params, Sdk) :
-
-    if params['test'] :
-        data = test_data()
-    else :
-        data = Sdk.Local.get_events()
-
-def test_data() :
+def data() :
     return [
         {'maker': 0, 'taker': 0},
         {'maker': 1, 'taker': 0},
